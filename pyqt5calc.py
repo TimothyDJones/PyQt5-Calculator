@@ -108,18 +108,23 @@ class Calc(QMainWindow):
 		divide.move(170, 115)
 		divide.resize(45, 40)
 
+		percent = QPushButton("%", self)
+		percent.move(225, 115)
+		percent.resize(45, 40)
+		percent.clicked.connect(self.Percent)
+
 		equals = QPushButton("=", self)
-		equals.move(225, 215)
+		equals.move(225, 265)
 		equals.resize(45, 40)
 		equals.clicked.connect(self.Equal)
 
 		squared = QPushButton("x²", self)
-		squared.move(225, 165)
+		squared.move(225, 215)
 		squared.resize(45, 40)
 		squared.clicked.connect(self.Squared)
 
 		sqroot = QPushButton("√", self)
-		sqroot.move(225, 115)
+		sqroot.move(225, 165)
 		sqroot.resize(45, 40)
 		sqroot.clicked.connect(self.SqRoot)
 
@@ -136,10 +141,10 @@ class Calc(QMainWindow):
 		# Apply CSS styling to buttons
 		nums = [zero, one, two, three, four, five, six, seven, eight, nine, ]
 		operators = [ce, clear, plus, minus, multiply, divide, equals, ]
-		others = [switch, squared, sqroot, point, ]
+		others = [switch, squared, sqroot, point, percent, ]
 
 		for i in nums:
-			i.setStyleSheet("color: blue; weight: bold;")
+			i.setStyleSheet("color: blue; font-weight: bold;")
 			i.clicked.connect(self.Num)
 
 		for i in (operators + others):
@@ -223,6 +228,13 @@ class Calc(QMainWindow):
 
 		self.line.setText(str(sumAll))
 		opVar = True
+
+	def Percent(self):
+		global num
+
+		num = float(self.line.text())
+		num /= 100
+		self.line.setText(str(num))
 
 	def SqRoot(self):
 		global num
